@@ -1,0 +1,100 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Vector u = new Vector();
+        Vector temp = new Vector();
+        Vector<Vector> v = new Vector<Vector>();
+        int i;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter the universe list and press 1 to end:");
+        String s = scan.nextLine();
+        while (!(s.equals("1"))) {
+            u.add(s);
+            s = scan.nextLine();
+        }
+        System.out.println("Enter the number of sets:");
+        int num = scan.nextInt();
+        for (i = 0; i < num; i++) {
+            System.out.println("Enter the set and press 1 to end");
+            temp = new Vector();
+            s = scan.nextLine();
+            while (!(s.equals("1"))) {
+                if (u.contains(s)) {
+                    temp.add(s);
+                    s = scan.nextLine();
+                } else {
+                    System.out.println("Doesn't exist in universe");
+                    s = scan.nextLine();
+                }
+            }
+            v.add(temp);
+        }
+        while (true) {
+            int ch,ch1,ch2;
+            Vector result=new Vector();
+            System.out.println("Choose an operation to do:");
+            System.out.println("1)Union of two sets");
+            System.out.println("2)Intersection of two sets");
+            System.out.println("3)complement of a set");
+            System.out.println("Press 4 to end");
+            ch=scan.nextInt();
+            operations ob = new operations();
+            if(ch==1){
+                System.out.println("Enter the number of the first set:");
+                ch1=scan.nextInt();
+                while(ch1>num){
+                    System.out.println("NOT valid input");
+                    System.out.println("Enter the number of the first set:");
+                    ch1=scan.nextInt();
+                }
+                System.out.println("Enter the number of the second set:");
+                ch2=scan.nextInt();
+                while(ch2>num){
+                    System.out.println("NOT valid input");
+                    System.out.println("Enter the number of the first set:");
+                    ch2=scan.nextInt();
+                }
+                result=ob.union(v,ch1,ch2);
+                System.out.println(result);
+            }
+            else if(ch==2){
+                System.out.println("Enter the number of the first set:");
+                ch1=scan.nextInt();
+                while(ch1>num){
+                    System.out.println("NOT valid input");
+                    System.out.println("Enter the number of the first set:");
+                    ch1=scan.nextInt();
+                }
+                System.out.println("Enter the number of the second set:");
+                ch2=scan.nextInt();
+                while(ch2>num){
+                    System.out.println("NOT valid input");
+                    System.out.println("Enter the number of the first set:");
+                    ch2=scan.nextInt();
+                }
+                result=ob.intersection(v,ch1,ch2);
+                System.out.println(result);
+            }
+            else if(ch==3){
+                System.out.println("Enter the number of the set:");
+                ch1=scan.nextInt();
+                while(ch1>num){
+                    System.out.println("NOT valid input");
+                    System.out.println("Enter the number of the set:");
+                    ch1=scan.nextInt();
+                }
+                result=ob.complement(u,v,ch1);
+                System.out.println(result);
+            }
+            else if(ch==4){
+                break;
+            }
+            else{
+                System.out.println("Not valid choice");
+            }
+        }
+    }
+}
