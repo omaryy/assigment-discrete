@@ -1,0 +1,60 @@
+package com.company;
+
+import java.util.Vector;
+
+public class operations {
+    public Vector union(Vector <Vector> v,int n1,int n2) {
+        Vector result=new Vector();
+        Vector first=new Vector();
+        Vector second=new Vector();
+        first.addAll(v.get(n1-1));
+        second.addAll(v.get(n2-1));
+        int flag = 0, i, j;
+        for (i = 0; i<first.size(); i++) {
+            flag = 0;
+            for (j = 0; j < second.size(); j++) {
+                if((second.get(j)).equals(first.get(i))){
+                    flag=1;
+                }
+            }
+            if(flag==0){
+                result.add(first.get(i));
+            }
+        }
+        result.addAll(second);
+        return result;
+    }
+    public Vector intersection(Vector<Vector>v,int n1,int n2){
+        Vector result=new Vector();
+        for(int i=0;i<v.get(n1-1).size();i++)
+        {
+            for(int j=0;j<v.get(n2-1).size();j++)
+            {
+                if(v.get(n1-1).get(i).equals(v.get(n2-1).get(j)))
+                {
+                    result.add(v.get(n1-1).get(i));
+                }
+            }
+        }
+
+        return result;
+    }
+    public Vector complement(Vector u,Vector<Vector>v,int n){
+        Vector result=new Vector();
+        for(int i=0;i<u.size();i++)
+        {
+            result.add(u.get(i));
+        }
+        for(int i=0;i<v.get(n-1).size();i++)
+        {
+            for(int j=0;j<result.size();j++)
+            {
+                if(v.get(n-1).get(i).equals(result.get(j)))
+                {
+                    result.remove(j);
+                }
+            }
+        }
+        return result;
+    }
+}
